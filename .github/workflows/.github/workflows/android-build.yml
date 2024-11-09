@@ -1,0 +1,25 @@
+name: Android Build
+
+on:
+  push:
+    branches:
+      - main  # указываем, что процесс будет запускаться при изменении в основной ветке
+  pull_request:
+    branches:
+      - main  # так же для pull request на основную ветку
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # используем последнюю версию Ubuntu для сборки
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # скачиваем ваш код
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'  # указываем версию Java, используемую в вашем проекте
+
+    - name: Build with Gradle
+      run: ./gradlew build  # запускаем сборку с помощью Gradle
